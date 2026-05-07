@@ -1,0 +1,3 @@
+I love Java
+Java is powerful
+Hello World
