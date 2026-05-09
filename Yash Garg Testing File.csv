@@ -1,0 +1,23 @@
+Test Case ID,Functionality,Objective/Summary,Pre-requisite/Primary Condition,Steps To Be Followed,Test Data,Expected Output,Actual Output,Status,Bug ID
+TC_AUTH_001,Authentication,Verify user can login with valid OTP,Login page should be open,1. Enter mobile number 2. Enter valid OTP 3. Click login,"7453912086, 629841",User should login successfully,Logged in successfully,Passed,
+TC_AUTH_002,Authentication,Verify login fails with invalid OTP,Login page should be open,1. Enter mobile number 2. Enter invalid OTP 3. Click login,"7453912086, 318547",Error message should display,OTP accepted,Failed,BUG-001
+TC_AUTH_003,Authentication,Verify expired OTP should not work,Login page should be open,1. Enter mobile number 2. Enter expired OTP 3. Click login,"7453912086, 904623",Expired OTP message should display,OTP rejected,Passed,
+TC_AUTH_004,Authentication,Verify login with unregistered number,Login page should be open,1. Enter unregistered number 2. Click continue,8261047593,Login should fail,Login failed,Passed,
+TC_AUTH_005,Authentication,Verify account lock after multiple wrong OTP attempts,Login page should be open,1. Enter wrong OTP multiple times (5 attempts),483920,Account should be temporarily blocked,Account blocked,Passed,
+TC_PAY_001,Payment,Verify successful payment using valid UPI ID,User should be logged in,1. Enter valid UPI ID 2. Enter amount 3. Click pay,"abc@paytm, 500",Payment should complete successfully,Payment successful,Passed,
+TC_PAY_002,Payment,Verify invalid UPI ID should fail,User should be logged in,1. Enter invalid UPI ID 2. Click pay,wrongupi@upi,Transaction should fail,Payment failed,Passed,
+TC_PAY_003,Payment,Verify payment handling with low balance,User should be logged in,1. Enter valid UPI ID 2. Enter payment details 3. Click pay,Amount: 50000,Insufficient balance message should display,Payment processed,Failed,BUG-002
+TC_PAY_004,Payment,Verify payment handling during network issue,Internet should be unstable,1. Start payment 2. Disconnect internet 3. Retry,UPI Payment,Retry/Error message should display,App frozen,Failed,BUG-003
+TC_PAY_005,Payment,Verify timeout handling during payment,User should be logged in,1. Initiate payment 2. Wait for timeout,UPI Payment,Timeout message should display,Timeout handled,Passed,
+TC_TRF_001,Money Transfer,Verify money transfer to valid account,Bank account should be linked,1. Enter valid account details 2. Transfer money,SBI12345678,Amount should transfer successfully,Money transferred,Passed,
+TC_TRF_002,Money Transfer,Verify transfer using invalid account number,Bank account should be linked,1. Enter invalid account number 2. Click transfer,12345,Transaction should fail,Transfer failed,Passed,
+TC_TRF_003,Money Transfer,Verify transfer exceeding daily limit,User should be logged in,1. Enter amount above limit 2. Click transfer,200000,Warning message should display,Amount transferred,Failed,BUG-004
+TC_BEN_001,Beneficiary,Verify beneficiary addition,User should be logged in,1. Enter beneficiary details 2. Save beneficiary,Yash Garg,Beneficiary should be added,Added successfully,Passed,
+TC_QR_001,QR Code,Verify payment using valid QR code,QR scanner should be open,1. Scan valid QR code 2. Pay amount,Receiver's QR,Payment should complete,Payment successful,Passed,
+TC_QR_002,QR Code,Verify invalid QR code handling,QR scanner should be open,1. Scan invalid QR code,Invalid QR,Error message should display,Error displayed,Passed,
+TC_QR_003,QR Code,Verify blur QR code scanning,QR scanner should be open,1. Scan blur QR code,Blur QR,QR should not scan,QR scanned,Failed,BUG-005
+TC_TXN_001,Transaction History,Verify transaction history display,User should be logged in,1. Open transaction history,Recent transactions,Correct history should display,History displayed,Passed,
+TC_TXN_002,Transaction History,Verify receipt generation after payment,Payment should be successful,1. Complete payment 2. View receipt,Payment receipt,Receipt should generate,Receipt generated,Passed,
+TC_ACC_001,Account Management,Verify user logout functionality,User should be logged in,1. Click logout button,Logout option,User should logout successfully,Logged out,Passed,
+TC_ACC_002,Account Management,Verify access without login,User should not login,1. Try opening profile page directly,Profile,Access should be denied,Access denied,Passed,
+TC_ACC_003,Account Management,Verify user can change UPI PIN successfully,User should be logged in and bank account linked,1. Open UPI settings 2. Select change UPI PIN 3. Enter old PIN 4. Enter new PIN 5. Confirm,"Old PIN: 1234, New PIN: 5678",UPI PIN should update successfully,PIN changed successfully,Passed,
