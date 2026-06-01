@@ -3,38 +3,46 @@ pipeline {
  
     tools {
         maven 'Maven3'
+        jdk  'jdk21'
     }
  
     stages {
  
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Yash28102/Wipro_Training-.git'
+                git branch: 'master', url: 'https://github.com/Yash28102/Wipro_Training-'
             }
         }
  
         stage('Build') {
             steps {
-                bat 'mvn clean'
+                dir('Cucumberdemo') {
+                    bat 'mvn clean'
+                }
             }
         }
  
         stage('Compile') {
             steps {
-                bat 'mvn compile'
+                dir('Cucumberdemo') {
+                    bat 'mvn compile'
+                }
             }
         }
  
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('Cucumberdemo') {
+                    bat 'mvn test'
+                }
             }
         }
  
         stage('Package') {
             steps {
-                bat 'mvn package'
+                dir('Cucumberdemo') {
+                    bat 'mvn package'
+                }
             }
         }
     }
