@@ -46,6 +46,19 @@ pipeline {
             }
         }
     }
+            stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t cucumber-project .'
+            }
+        }
+    }
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+
+ 
  
     post {
         success {
