@@ -1,19 +1,20 @@
 pipeline {
     agent any
- 
+
     tools {
         maven 'Maven3'
-        jdk  'JDK'
+        jdk 'JDK'
     }
- 
+
     stages {
- 
+
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Yash28102/Wipro_Training-'
+                git branch: 'master',
+                    url: 'https://github.com/Yash28102/Wipro_Training-'
             }
         }
- 
+
         stage('Build') {
             steps {
                 dir('Cucumberdemo') {
@@ -21,7 +22,7 @@ pipeline {
                 }
             }
         }
- 
+
         stage('Compile') {
             steps {
                 dir('Cucumberdemo') {
@@ -29,7 +30,7 @@ pipeline {
                 }
             }
         }
- 
+
         stage('Test') {
             steps {
                 dir('Cucumberdemo') {
@@ -37,7 +38,7 @@ pipeline {
                 }
             }
         }
- 
+
         stage('Package') {
             steps {
                 dir('Cucumberdemo') {
@@ -45,26 +46,23 @@ pipeline {
                 }
             }
         }
-    }
-            stage('Build Docker Image') {
+
+        stage('Build Docker Image') {
             steps {
-                bat 'docker build -t cucumber-project .'
+                dir('Cucumberdemo') {
+                    bat 'docker build -t cucumber-project .'
+                }
             }
         }
     }
-    post {
-        always {
-            junit '**/target/surefire-reports/*.xml'
-        }
-    }
 
-post {
+    post {
 
         always {
             junit allowEmptyResults: true,
-                  testResults: 'CucumberBDD2/target/junitreports/*.xml'
+                  testResults: '**/target/surefire-reports/*.xml'
 
-            archiveArtifacts artifacts: 'CucumberBDD2/target/*/.*',
+            archiveArtifacts artifacts: '**/target/**/*',
                              fingerprint: true
         }
 
@@ -76,17 +74,4 @@ post {
             echo 'Build Failed'
         }
     }
-
- 
- 
-    post {
-        success {
-            echo 'Build Successful'
-        }
- 
-        failure {
-            echo 'Build Failed'
-        }
-    }
 }
- 
