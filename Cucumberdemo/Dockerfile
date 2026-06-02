@@ -1,4 +1,5 @@
-FROM maven:3.9.11-eclipse-temurin-21
+FROM maven:3.9.15-eclipse-temurin-25
+
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
