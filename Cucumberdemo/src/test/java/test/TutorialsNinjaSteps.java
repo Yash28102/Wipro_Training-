@@ -41,8 +41,13 @@ public class TutorialsNinjaSteps {
 
     @Given("user opens tutorialsninja website")
     public void openWebsite() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        ChromeOptions options = new ChromeOptions();
+ 
+		options.addArguments("--headless=new");
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
+ 
+		driver = new ChromeDriver(options);
         driver.get("https://tutorialsninja.com/demo");
     }
 
